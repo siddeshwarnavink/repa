@@ -1,18 +1,13 @@
-import nltk
-from sklearn.feature_extraction.text import CountVectorizer
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
+from sentence_transformers import SentenceTransformer, util
 import numpy as np
 
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
+model = SentenceTransformer('all-MiniLM-L6-v2')
 
 keyword_weights = {
-    'python': 2,
-    'machine learning': 3,
-    'data analysis': 2,
-    'deep learning': 3
+    'python programming': 2,
+    'machine learning projects': 3,
+    'data analysis using pandas': 2,
+    'deep learning with neural networks': 3
 }
 keywords = list(keyword_weights.keys())
 
@@ -22,23 +17,17 @@ resumes = [
     "Expert in data analysis and machine learning. Familiar with NLP techniques."
 ]
 
-def preprocess(text):
-    lemmatizer = WordNetLemmatizer()
-    stop_words = set(stopwords.words('english'))
-    tokens = nltk.word_tokenize(text.lower())
-    tokens = [lemmatizer.lemmatize(token) for token in tokens if token.isalnum() and token not in stop_words]
-    return ' '.join(tokens)
+resume_embeddings = model.encode(resumes, convert_to_tensor=True)
+keyword_embeddings = model.encode(keywords, convert_to_tensor=True)
 
-preprocessed_resumes = [preprocess(resume) for resume in resumes]
+similarity_matrix = util.cos_sim(resume_embeddings, keyword_embeddings).cpu().numpy()
 
-vectorizer = CountVectorizer(vocabulary=keywords, ngram_range=(1, 2), binary=True)
-count_matrix = vectorizer.fit_transform(preprocessed_resumes).toarray()
+weights = np.array([keyword_weights[k] for k in keywords])
+weighted_scores = similarity_matrix @ weights
 
-weights = np.array([keyword_weights[key] for key in keywords])
-scores = np.dot(count_matrix, weights)
-ranked_resumes = sorted(zip(resumes, scores), key=lambda x: x[1], reverse=True)
+ranked_resumes = sorted(zip(resumes, weighted_scores), key=lambda x: x[1], reverse=True)
 
 total_possible_score = sum(keyword_weights.values())
 
 for idx, (resume, score) in enumerate(ranked_resumes, start=1):
-    print(f"Rank {idx} - Score: {score}/{total_possible_score}\nResume: {resume}\n")
+    print(f"Rank {idx} - Contextual Score: {score:.2f}/{total_possible_score}\nResume: {resume}\n")
