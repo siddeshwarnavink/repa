@@ -1,0 +1,66 @@
+[
+	{
+		"type": "function",
+		"function": {
+			"name": "parse_resume",
+			"description": "Parses a resume and returns structured candidate information and hiring decision.",
+			"parameters": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "Candidate's full name"
+					},
+					"years_of_experience": {
+						"type": "integer",
+						"description": "Total years of relevant experience"
+					},
+					"skills": {
+						"type": "array",
+						"items": { "type": "string" },
+						"description": "List of technical skills and tools mentioned in the resume"
+					},
+					"projects": {
+						"type": "array",
+						"description": "List of relevant projects with details",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": { "type": "string", "description": "Project name or title" },
+								"description": { "type": "string", "description": "Short description of the project" },
+								"tech_stack": {
+									"type": "array",
+									"items": { "type": "string" },
+									"description": "Technologies used in the project"
+								},
+								"quality_score": {
+									"type": "number",
+									"description": "Estimated quality score (0.5 to 1.5)"
+								}
+							},
+							"required": ["name", "description", "tech_stack", "quality_score"]
+						}
+					},
+					"education": {
+						"type": "array",
+						"items": { "type": "string" },
+						"description": "Degrees or academic qualifications"
+					},
+					"decision": {
+						"type": "string",
+						"enum": ["Accepted", "Rejected"],
+						"description": "Final hiring decision based on resume content and HR requirements"
+					}
+				},
+				"required": [
+					"name",
+					"years_of_experience",
+					"skills",
+					"projects",
+					"education",
+					"decision"
+				]
+			}
+		}
+	}
+]
