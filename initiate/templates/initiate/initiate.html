@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% block head %}
+{% load static %}
+<script src="{% static 'js/chips-input.js' %}" defer></script>
+{% endblock %}
+
 {% block content %}
 <div class="page-card">
   <h1>Initiate New Process</h1>
@@ -12,6 +17,7 @@
 
 	<div class="form-group">
 	  <label>Required Skills</label>
+	  <chips-input name="required_skills"></chips-input>
 	</div>
 
 	<div class="form-group">
@@ -21,21 +27,15 @@
 
 	<div class="form-group">
 	  <label>Must have keywords</label>
+	  <chips-input name="must_have_keywords"></chips-input>
 	</div>
 
 	<div class="form-group">
 	  <label>Preferred Education</label>
 	  <input type="checkbox" name="preferred_education" value="B.Tech"> B.Tech<br>
 	  <input type="checkbox" name="preferred_education" value="M.Tech"> M.Tech<br>
-	  <input type="checkbox" name="preferred_education" value="MS in Computer Science"> MS in Computer Science<br>
-	  <input type="checkbox" name="preferred_education" value="B.E."> B.E.<br>
-	  <input type="checkbox" name="preferred_education" value="M.E."> M.E.<br>
 	  <input type="checkbox" name="preferred_education" value="MCA"> MCA<br>
 	  <input type="checkbox" name="preferred_education" value="BCA"> BCA<br>
-	  <input type="checkbox" name="preferred_education" value="B.Sc in Computer Science"> B.Sc in Computer Science<br>
-	  <input type="checkbox" name="preferred_education" value="M.Sc in Computer Science"> M.Sc in Computer Science<br>
-	  <input type="checkbox" name="preferred_education" value="Diploma in Computer Science"> Diploma in Computer Science<br>
-	  <input type="checkbox" name="preferred_education" value="PhD in Computer Science"> PhD in Computer Science<br>
 	</div>
 
 	<div class="form-group">

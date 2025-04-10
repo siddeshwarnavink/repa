@@ -93,6 +93,7 @@ ul.navbar li a.active {
 
 .form-input {
 	display: block;
+	border: 1px solid #ccc;
 	min-width: 350px;
 	padding: 10px 12px;
 	font-size: 1.2rem;
