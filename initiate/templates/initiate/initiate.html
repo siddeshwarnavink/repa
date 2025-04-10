@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-card">
+  <h1>Initiate New Process</h1>
+
+  <form>
+	<div class="form-group">
+	  <label for="job_title">Job Title</label>
+	  <input class="form-input" type="text" id="job_title" name="job_title" placeholder="e.g: Senior Machine Learning Engineer" />
+	</div>
+
+	<div class="form-group">
+	  <label>Required Skills</label>
+	</div>
+
+	<div class="form-group">
+	  <label>Minimum Experience (in years)</label>
+	  <input class="form-input" type="number" id="min_experience_years" name="min_experience_years" placeholder="e.g: 5" value="1" />
+	</div>
+
+	<div class="form-group">
+	  <label>Must have keywords</label>
+	</div>
+
+	<div class="form-group">
+	  <label>Preferred Education</label>
+	  <input type="checkbox" name="preferred_education" value="B.Tech"> B.Tech<br>
+	  <input type="checkbox" name="preferred_education" value="M.Tech"> M.Tech<br>
+	  <input type="checkbox" name="preferred_education" value="MS in Computer Science"> MS in Computer Science<br>
+	  <input type="checkbox" name="preferred_education" value="B.E."> B.E.<br>
+	  <input type="checkbox" name="preferred_education" value="M.E."> M.E.<br>
+	  <input type="checkbox" name="preferred_education" value="MCA"> MCA<br>
+	  <input type="checkbox" name="preferred_education" value="BCA"> BCA<br>
+	  <input type="checkbox" name="preferred_education" value="B.Sc in Computer Science"> B.Sc in Computer Science<br>
+	  <input type="checkbox" name="preferred_education" value="M.Sc in Computer Science"> M.Sc in Computer Science<br>
+	  <input type="checkbox" name="preferred_education" value="Diploma in Computer Science"> Diploma in Computer Science<br>
+	  <input type="checkbox" name="preferred_education" value="PhD in Computer Science"> PhD in Computer Science<br>
+	</div>
+
+	<div class="form-group">
+	  <button class="btn" type="submit">Start</button>
+	</div>
+  </form>
+</div>
+{% endblock %}

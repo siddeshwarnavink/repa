@@ -18,6 +18,7 @@ resume_input = {
     "min_experience_years": 3,
     "must_have_keywords": ["production", "deployed", "real-time"],
     "preferred_education": ["B.Tech", "M.Tech", "MS in Computer Science"],
+    "strictness": 1.0,
     "resume_text": """
         John Doe is a software engineer with over 5 years of experience in Python and machine learning.
         Built a production-grade fraud detection system using TensorFlow.
@@ -51,6 +52,7 @@ response = client.chat.completions.create(
                 "- min_experience_years\n"
                 "- must_have_keywords in resume_text\n"
                 "- preferred_education\n"
+                "- strictness of evaluation on a scale of 0 to 1"
             )
         }
     ],
