@@ -8,38 +8,55 @@
 {% block content %}
 <div class="page-card">
   <h1>Initiate New Process</h1>
-
-  <form>
+  <form method="POST">
+	{% csrf_token %}
 	<div class="form-group">
-	  <label for="job_title">Job Title</label>
-	  <input class="form-input" type="text" id="job_title" name="job_title" placeholder="e.g: Senior Machine Learning Engineer" />
-	</div>
-
+      <label for="job_title">Job Title</label>
+      {{ form.job_title }}
+      {% if form.job_title.errors %}
+      <div class="error">
+        {{ form.job_title.errors }}
+      </div>
+      {% endif %}
+    </div>
 	<div class="form-group">
 	  <label>Required Skills</label>
 	  <chips-input name="required_skills"></chips-input>
+	  {% if form.required_skills.errors %}
+      <div class="error">
+        {{ form.required_skills.errors }}
+      </div>
+      {% endif %}
 	</div>
-
 	<div class="form-group">
 	  <label>Minimum Experience (in years)</label>
-	  <input class="form-input" type="number" id="min_experience_years" name="min_experience_years" placeholder="e.g: 5" value="1" />
+	  {{ form.min_experience_years }}
+      {% if form.min_experience_years.errors %}
+      <div class="error">
+        {{ form.min_experience_years.errors }}
+      </div>
+      {% endif %}
 	</div>
-
 	<div class="form-group">
 	  <label>Must have keywords</label>
 	  <chips-input name="must_have_keywords"></chips-input>
+	  {% if form.must_have_keywords.errors %}
+      <div class="error">
+        {{ form.must_have_keywords.errors }}
+      </div>
+      {% endif %}
 	</div>
-
 	<div class="form-group">
 	  <label>Preferred Education</label>
-	  <input type="checkbox" name="preferred_education" value="B.Tech"> B.Tech<br>
-	  <input type="checkbox" name="preferred_education" value="M.Tech"> M.Tech<br>
-	  <input type="checkbox" name="preferred_education" value="MCA"> MCA<br>
-	  <input type="checkbox" name="preferred_education" value="BCA"> BCA<br>
+	  {{ form.preferred_education }}
+      {% if form.preferred_education.errors %}
+      <div class="error">
+        {{ form.preferred_education.errors }}
+      </div>
+      {% endif %}
 	</div>
-
 	<div class="form-group">
-	  <button class="btn" type="submit">Start</button>
+	  <button class="btn" type="submit">Next</button>
 	</div>
   </form>
 </div>
