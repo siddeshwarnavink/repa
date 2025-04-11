@@ -1,5 +1,5 @@
 from django import forms
-from .models import Process
+from .models import Process, ProcessFile
 
 class ProcessForm(forms.ModelForm):
     preferred_education = forms.MultipleChoiceField(
@@ -20,3 +20,8 @@ class ProcessForm(forms.ModelForm):
             'job_title': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'e.g: Senior Machine Learning Engineer'}),
             'min_experience_years': forms.NumberInput(attrs={'class': 'form-input', 'placeholder': 'e.g: 2'})
         }
+
+class ProcessFileForm(forms.ModelForm):
+    class Meta:
+        model = ProcessFile
+        fields = ['file']

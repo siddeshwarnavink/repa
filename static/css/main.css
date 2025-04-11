@@ -50,8 +50,24 @@ ul.navbar li a.active {
 	border-bottom: 5px solid #000;
 }
 
+/* Table */
+table, td, th {
+	border: 1px solid #ddd;
+	text-align: left;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
 /* Form */
-.btn {
+.btn,
+input[type=file]::file-selector-button {
 	align-items: center;
 	background-color: #3EB2FD;
 	background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
@@ -73,12 +89,35 @@ ul.navbar li a.active {
 	white-space: nowrap;
 }
 
-.btn:focus {
+.btn-danger {
+	background-color: #FF5252;
+	background-image: linear-gradient(1deg, #FF3D00, #D50000 99%);
+	background-size: calc(100% + 20px) calc(100% + 20px);
+}
+
+input[type=file]::file-selector-button,
+.btn-tiny {
+	padding: 8px 16px;
+	font-size: 0.8rem;
+}
+
+.btn:focus,
+input[type=file]::file-selector-button:focus {
 	outline: none;
 	box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
 }
 
-.btn:hover {
+.btn:hover,
+input[type=file]::file-selector-button:hover {
+	background-position: -20px -20px;
+}
+
+.btn-danger:focus {
+	outline: none;
+	box-shadow: rgba(213, 0, 0, 0.25) 0 0 0 .125em;
+}
+
+.btn-danger:hover {
 	background-position: -20px -20px;
 }
 
