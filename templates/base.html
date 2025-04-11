@@ -17,8 +17,8 @@
 		</a>
 	  </li>
 	  <li>
-		<a href="{% url 'initiate' %}"
-		   class="{% if request.resolver_match.url_name == 'queue' %}active{% endif %}">
+		<a href="{% url 'queue' %}"
+		   class="{% if request.resolver_match.url_name == 'queue' or request.resolver_match.url_name == 'queue-item' %}active{% endif %}">
 		  Queue
 		</a>
 	  </li>

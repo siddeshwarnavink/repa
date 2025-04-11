@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.conf import settings
 from .forms import ProcessForm, ProcessFileForm
 from .models import Process, ProcessFile
+from .tasks import process_files_task
 
 def initiate_view(request):
     if request.method == 'POST':
@@ -22,7 +23,7 @@ def initiate_view(request):
         return render(request, 'initiate/initiate.html', {'form': form})
 
 def fileupload_view(request, initiateId):
-    process = get_object_or_404(Process, id=initiateId)
+    process = get_object_or_404(Process, id=initiateId, status=Process.ProcessStatus.FILE_UPLOADING)
     #  Upload file
     if request.method == 'POST' and 'upload_file' in request.POST:
         form = ProcessFileForm(request.POST, request.FILES)
@@ -46,9 +47,15 @@ def fileupload_view(request, initiateId):
     else:
         form = ProcessFileForm()
         process_files = process.files.all()
-
         return render(request, 'initiate/fileupload.html', {
             'process': process,
             'form': form,
             'process_files': process_files,
         })
+
+def fileupload_complete_view(request, initiateId):
+    process = get_object_or_404(Process, id=initiateId, status=Process.ProcessStatus.FILE_UPLOADING)
+    process.status = Process.ProcessStatus.RUNNING
+    process.save()
+    process_files_task.delay(initiateId)
+    return redirect('queue-item', initiateId=initiateId)

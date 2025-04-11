@@ -43,7 +43,7 @@
     </tbody>
   </table>
   <br>
-  <form method="POST">
+  <form action="{% url 'fileupload-complate' process.id %}" method="POST">
     {% csrf_token %}
     <button class="btn" type="submit">Initiate Process</button>
   </form>
