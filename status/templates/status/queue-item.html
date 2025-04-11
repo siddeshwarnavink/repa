@@ -5,21 +5,31 @@
 {% block content %}
 <div class="page-card">
   <h1>{{ process.job_title }}</h1>
-  <b>Status:</b> {{ process.get_status_display }}
+  <div>
+	<b>Status:</b> {{ process.get_status_display }}
+  </div>
+  <br />
+  <a href="{% url 'queue-item' process.id %}" class="btn">Refresh Status</a>
 </div>
 <div class="page-card">
   <h2>Uploaded Files</h2>
   <table>
     <thead>
       <tr>
-        <th>File</th>
+		<th>Candidate Name</th>
+        <th>Status</th>
+		<th>Score</th>
+		<th>Remarks</th>
         <th>Uploaded At</th>
       </tr>
     </thead>
     <tbody>
       {% for file in process_files %}
       <tr>
-        <td><a href="{{ file.file.url }}">{{ file.file.name }}</a></td>
+		<td>{{ file.candidate_name }}</td>
+		<td>{{ file.score }}</td>
+		<td>{{ file.remarks }}</td>
+		<td>{{ file.get_status_display }}</td>
         <td>{{ file.uploaded_at }}</td>
       </tr>
       {% empty %}

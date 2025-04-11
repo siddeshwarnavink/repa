@@ -54,8 +54,5 @@ def fileupload_view(request, initiateId):
         })
 
 def fileupload_complete_view(request, initiateId):
-    process = get_object_or_404(Process, id=initiateId, status=Process.ProcessStatus.FILE_UPLOADING)
-    process.status = Process.ProcessStatus.RUNNING
-    process.save()
     process_files_task.delay(initiateId)
     return redirect('queue-item', initiateId=initiateId)
